@@ -4,18 +4,25 @@ import * as vscode from 'vscode';
 import { UnCheck } from '../../Ext/External.Methods';
 
 
-export const DateTimeInstanceDisposable = vscode.languages.registerCompletionItemProvider(
+export const AssemblyInstanceDisposable = vscode.languages.registerCompletionItemProvider(
     'csharp',
     {
         
         provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.CompletionItem[]> 
         {
             const listVariables = Array<string>();
-            const endsWithBooleans = [];           
-            if (document.getText().includes("DateTime ")) {
+            const endsWithBooleans = [];
+           
+            if (document.getText().includes("AssemblyFlags ") 
+            || document.getText().includes("AssemblyHashAlgorithm ")
+            || document.getText().includes("AssemblyNameFlags ")
+
+            ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("DateTime ") 
+                    if(line.includes("AssemblyFlags ") 
+                    || line.includes("AssemblyHashAlgorithm ")
+                    || line.includes("AssemblyNameFlags ")
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
@@ -36,22 +43,21 @@ export const DateTimeInstanceDisposable = vscode.languages.registerCompletionIte
                  }
 
             var json = require('../../Json/trial.json');
-            var Methods = json.System.DatatypesInstance.DateTime.Methods as string[];
+            var Methods = json.System.ClassInstance.Assembly.Methods as string[];
             
-
+            
             return new Promise((resolve, reject) => { 
             var completionItems:vscode.CompletionItem[] = [];
 
-                for (let index = 0; index < listVariables.length; index++) {
-                    var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
-                    completionItem.detail = "instance";
+               for (let index = 0; index < listVariables.length; index++) {
+                   var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
+                   completionItem.detail = "instance";
                     completionItem.filterText = listVariables[index];
                     completionItem.insertText = listVariables[index];
                     completionItem.kind = vscode.CompletionItemKind.Variable;
                     completionItems.push(completionItem);
                     
                 }
-
 
                 const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let index = 0; index < listVariables.length; index++) {
@@ -66,13 +72,10 @@ export const DateTimeInstanceDisposable = vscode.languages.registerCompletionIte
                     }
                 }
 
-
+            
             return resolve(completionItems);
             });
         }, 
     
 },'.'
 );
-
-
-
