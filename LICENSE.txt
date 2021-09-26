@@ -1,8 +1,6 @@
 Permission is hereby granted, free of charge, to private usage only (non-commercial)
 to deal with the Software with only the following rights:
 
-1. The right to use the Software privatly (not in the scope of companies or corporations)
-2. The right to to contribute,  modify and push code to this repostory only.
-3. For commercial usages and company usages please contact the developer [simon.m.binyamin@gmail.com] 
-
-
+1. The right to use the Software privately (not in the scope of companies or corporations)
+2. The right to to contribute, modify and push code to this repository only.
+3. For commercial usages and company scopes please contact the developer [simon.m.binyamin@gmail.com]
