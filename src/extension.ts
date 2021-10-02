@@ -134,6 +134,18 @@ export function activate(context: vscode.ExtensionContext) {
 				var classes = json.Classes as string[];
 				var events = json.Events as string[];
 				var structs = json.Struts as string[]
+				var Keywords = json.Keywords as string[]
+
+				for (let index = 0; index < Keywords.length; index++) {
+					
+					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(Keywords[index]);
+					completionItem.detail = Keywords[index];
+					completionItem.filterText = Keywords[index];
+					completionItem.insertText = Keywords[index];
+					completionItem.kind = vscode.CompletionItemKind.Keyword;
+					completionItems.push(completionItem);
+					
+				}
 
 				for (let index = 0; index < classes.length; index++) {
 					

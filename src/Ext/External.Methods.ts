@@ -33,7 +33,7 @@ export function ToCheck(values: string[]){
         list.push(astr);
 }
 
-console.log(list);
+
 }
 export let map: IHash = {};   
 
