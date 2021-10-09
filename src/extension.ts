@@ -110,6 +110,9 @@ import { TaskDisposable } from './System/Task';
 import { ToStringDisposable } from './System/ToString';
 import { uriDisposable } from './System/Uri';
 import { AssemblyInstanceDisposable } from './System/Class.instance/assembly.instance';
+import { LookupInstanceDisposable } from './System/Collections/Generic/Lookup.instance';
+import { HttpContentInstanceDisposable } from './System/Class.instance/httpContent.instance';
+import { HttpClientInstanceDisposable } from './System/Class.instance/httpClient.instance';
 
 
 // this method is called when your extension is activated
@@ -329,6 +332,8 @@ export function activate(context: vscode.ExtensionContext) {
 		DecimalDisposable,
 		DelegateDisposable,
 		EventHandlerDisposable,
+		LookupInstanceDisposable,
+		HttpContentInstanceDisposable,
 		ToStringDisposable,
 		EnumDisposable,
         EnvironmentDisposable,
@@ -337,7 +342,8 @@ export function activate(context: vscode.ExtensionContext) {
         JsonConvertDisposable,
         ParallelDisposable,
         TaskDisposable,
-		AttributeInstanceDisposable
+		AttributeInstanceDisposable,
+		HttpClientInstanceDisposable
 		);
 }
             //int uint ulong long float double decimal short ushort byte sbyte char bool object
