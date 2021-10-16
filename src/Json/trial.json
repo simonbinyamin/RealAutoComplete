@@ -23,6 +23,18 @@
             },
             "HttpClient": {
                 "Methods":["&#]/?€|?])i]-8?7u?sts", "(?€?t?!sy]/", "(is0±s?", "=7u#€s", "G?t!sy]/", "G?t¤yt?!99#y!sy]/", "G?t_#sh&±)?", "G?tSt9?#{!sy]/", "G?tSt9i]-!sy]/", "G?tTy0?", "|#t/h!sy]/", "|±st!sy]/", "|ut!sy]/", "S?])", "S?])!sy]/", "T±St9i]-" ]
+            },
+            "StreamContent": {
+                "Methods":["&±0yT±", "&±0yT±!sy]/", "(is0±s?", "=7u#€s", "G?t_#sh&±)?", "G?tTy0?", "$±#):]t±¤uff?9!sy]/", "8?#)!s¤yt?!99#y!sy]/", "8?#)!sSt9?#{", "8?#)!sSt9?#{!sy]/", "8?#)!sSt9i]-!sy]/", "T±St9i]-" ]
+            },
+            "ViewResult": {
+                "Methods":["=7u#€s", "=x?/ut?8?su€t", "=x?/ut?8?su€t!sy]/", "G?t_#sh&±)?", "G?tTy0?", "T±St9i]-" ]
+            },
+            "Uri":{
+                "Methods":["=7u#€s", "G?t&±{0±]?]ts", "G?t_#sh&±)?", "G?t$?ft|#9t", "G?tTy0?", ":s¤#s?}f", ":sW?€€*±9{?)}9i-i]#€St9i]-", "¥#£?8?€#tiv?", "¥#£?8?€#tiv?U9i", "T±St9i]-" ]
+            },
+            "Task":{
+                "Methods":["&±]fi-u9?!w#it", "&±]ti]u?With", "&±]ti]u?With<>", "(is0±s?", "=7u#€s", "G?t!w#it?9", "G?t_#sh&±)?", "G?tTy0?", "8u]Sy]/h9±]±us€y", "St#9t", "T±St9i]-", "W#it" ]
             }
         },
         "DatatypesInstance": {
@@ -210,11 +222,13 @@
         "ImmutableArrayExtensions",
         "Index",
         "Enum",
+        "ViewResult",
         "HttpClient",
+        "StreamContent",
         "Environment",
         "HttpMethod",	
         "JObject",		
-        "JsonConvert",		
+        "JsonConvert",	
         "Parallel",
         "Task",
         "Queryable",		

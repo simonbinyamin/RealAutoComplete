@@ -113,6 +113,10 @@ import { AssemblyInstanceDisposable } from './System/Class.instance/assembly.ins
 import { LookupInstanceDisposable } from './System/Collections/Generic/Lookup.instance';
 import { HttpContentInstanceDisposable } from './System/Class.instance/httpContent.instance';
 import { HttpClientInstanceDisposable } from './System/Class.instance/httpClient.instance';
+import { StreamContentInstanceDisposable } from './System/Class.instance/streamContent.instance';
+import { ViewResultInstanceDisposable } from './System/Class.instance/viewResult.instance';
+import { UriInstanceDisposable } from './System/Class.instance/uri.instance';
+import { TaskInstanceDisposable } from './System/Class.instance/task.instance';
 
 
 // this method is called when your extension is activated
@@ -343,7 +347,11 @@ export function activate(context: vscode.ExtensionContext) {
         ParallelDisposable,
         TaskDisposable,
 		AttributeInstanceDisposable,
-		HttpClientInstanceDisposable
+		HttpClientInstanceDisposable,
+		StreamContentInstanceDisposable,
+		ViewResultInstanceDisposable,
+		UriInstanceDisposable,
+		TaskInstanceDisposable
 		);
 }
             //int uint ulong long float double decimal short ushort byte sbyte char bool object
