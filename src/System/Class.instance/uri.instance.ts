@@ -13,11 +13,26 @@ export const UriInstanceDisposable = vscode.languages.registerCompletionItemProv
             const listVariables = Array<string>();
             const endsWithBooleans = [];
            
-            if (document.getText().includes("Uri ") 
+            // if (document.getText().includes("Uri ") 
+            // ) {
+            //     for (let i = 1; i < document.lineCount; i++) {
+            //         var line = document.lineAt(i).text;
+            //         if(line.includes("Uri ") 
+            //         ) {
+            //             var lineArray = line.split(" ");
+            //             lineArray = lineArray.filter(e => String(e).trim());
+            //             listVariables.push(lineArray[1]);
+            //         }
+            //     }
+            // }
+            
+
+            //Uri x = new Uri
+            if (document.getText().includes("Uri ")
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("Uri ") 
+                    if(line.includes("Uri ") && line.indexOf(";") !== -1 && line.includes("new")
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
@@ -26,6 +41,63 @@ export const UriInstanceDisposable = vscode.languages.registerCompletionItemProv
                 }
             }
             
+            // var x =  new Uri
+            if (document.getText().includes("var ") && document.getText().includes("new Uri")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("var ") && line.includes("new Uri")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1]);
+                    }
+                }
+            }
+
+            // Uri x;
+            if (document.getText().includes("Uri ")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("Uri ") && line.indexOf(";") !== -1 && !line.includes("new")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1].slice(0, -1));
+                    }
+                }
+            }
+
+            // method(Uri x,Uri x, Uri x)
+            if (document.getText().indexOf("Uri") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.indexOf("Uri") !== -1 && !line.includes("var")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+
+                        let index1 = lineArray.findIndex(str => str.includes("Uri"))
+
+                        if(index1 > 1) {
+
+                            var instaince = lineArray[index1+1];
+                            if(instaince.indexOf(",") !== -1) {
+                             listVariables.push(instaince.slice(0, -1));                               
+                            } else if (instaince.indexOf("){") !== -1) {
+                                listVariables.push(instaince.slice(0, -2));
+                            } else if (instaince.indexOf(")") !== -1) {
+                                listVariables.push(instaince.slice(0, -1));
+                            }
+
+                        }
+
+                       
+                    }
+                }
+            }
             const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let i = 0; i < listVariables.length; i++) {
                     var e = !linePrefix.endsWith(listVariables[i]+".");
