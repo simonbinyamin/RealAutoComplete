@@ -1,6 +1,6 @@
 # Real C# intellisense
 
-Real C# intellisense will autocomplete your c# project with .NET static classes and methods
+Real Csharp intellisense will autocomplete your Csharp project with .NET static classes and methods
 
 ## Screenshot
 
@@ -9,7 +9,7 @@ Real C# intellisense will autocomplete your c# project with .NET static classes 
 ## How to start
 
 ctrl+shift+p and choose 'real-csharp-intellisense'
-do this each time you open a C#/.NET project
+do this each time you open a .NET project
 
 ## Features
 
