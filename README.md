@@ -2,7 +2,12 @@
 
 Real C# intellisense will autocomplete your c# project with .NET static classes and methods
 
+## Screenshot
+
+![alt text](https://raw.githubusercontent.com/simonbinyamin/RealVisualStudio/master/icons/vsint1.png)
+
 ## How to start
+
 ctrl+shift+p and choose 'real-csharp-intellisense'
 do this each time you open a C#/.NET project
 
