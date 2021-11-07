@@ -13,15 +13,88 @@ export const ArrayInstanceDisposable = vscode.languages.registerCompletionItemPr
             const listVariables = Array<string>();
             const endsWithBooleans = [];
            
-            if (document.getText().includes("[]") 
+            // if (document.getText().includes("[]") 
+            // ) {
+            //     for (let i = 1; i < document.lineCount; i++) {
+            //         var line = document.lineAt(i).text;
+            //         if(line.includes("[]") 
+            //         ) {
+            //             var lineArray = line.split(" ");
+            //             lineArray = lineArray.filter(e => String(e).trim());
+            //             listVariables.push(lineArray[1]);
+            //         }
+            //     }
+            // }
+            
+
+            //string[] array = new string[] { "A", "B" };
+            if (document.getText().includes("[]")
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("[]") 
+                    if(line.includes("[]") && line.indexOf(";") !== -1 && line.includes("new") && !line.includes("var")
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
                         listVariables.push(lineArray[1]);
+                    }
+                }
+            }
+            
+            // var array = new string[] { "A", "B" };
+            if (document.getText().includes("var ") && document.getText().indexOf("new") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("var ") && line.includes("new") && line.indexOf(";") !== -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1]);
+                    }
+                }
+            }
+
+            // string[] array;
+            if (document.getText().includes("[]")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("[]") && line.indexOf(";") !== -1 && !line.includes("new")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1].slice(0, -1));
+                    }
+                }
+            }
+
+            // method(Uri x,Uri x, Uri x)
+            if (document.getText().indexOf("[]") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.indexOf("[]") !== -1 && !line.includes("var") && line.indexOf(";") === -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+
+                        let index1 = lineArray.findIndex(str => str.includes("[]"))
+
+                        if(index1 > 1) {
+
+                            var instaince = lineArray[index1+1];
+                            if(instaince.indexOf(",") !== -1) {
+                             listVariables.push(instaince.slice(0, -1));                               
+                            } else if (instaince.indexOf("){") !== -1) {
+                                listVariables.push(instaince.slice(0, -2));
+                            } else if (instaince.indexOf(")") !== -1) {
+                                listVariables.push(instaince.slice(0, -1));
+                            }
+
+                        }
+
+                       
                     }
                 }
             }
@@ -46,12 +119,12 @@ export const ArrayInstanceDisposable = vscode.languages.registerCompletionItemPr
             var completionItems:vscode.CompletionItem[] = [];
 
                for (let index = 0; index < listVariables.length; index++) {
-                //    var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
-                //    completionItem.detail = "instance";
-                //     completionItem.filterText = listVariables[index];
-                //     completionItem.insertText = listVariables[index];
-                //     completionItem.kind = vscode.CompletionItemKind.Variable;
-                //     completionItems.push(completionItem);
+                   var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
+                   completionItem.detail = "instance";
+                    completionItem.filterText = listVariables[index];
+                    completionItem.insertText = listVariables[index];
+                    completionItem.kind = vscode.CompletionItemKind.Variable;
+                    completionItems.push(completionItem);
                     
                 }
 
@@ -59,20 +132,20 @@ export const ArrayInstanceDisposable = vscode.languages.registerCompletionItemPr
                 for (let index = 0; index < listVariables.length; index++) {
                     
                     
-                    // if (linePrefix.endsWith(listVariables[index]+'.')) {
-                    //     for (let i = 0; i < Methods.length; i++) {
-                    //         var ob = new vscode.CompletionItem(UnCheck(Methods[i]), vscode.CompletionItemKind.Method)
-                    //         completionItems.push(ob);
+                    if (linePrefix.endsWith(listVariables[index]+'.')) {
+                        for (let i = 0; i < Methods.length; i++) {
+                            var ob = new vscode.CompletionItem(UnCheck(Methods[i]), vscode.CompletionItemKind.Method)
+                            completionItems.push(ob);
                     
-                    //     }
+                        }
 
-                    //     if (document.getText().includes("using System.Linq;")) {
-                    //         for (let i = 0; i < LinqMethods.length; i++) {
-                    //             var ob = new vscode.CompletionItem(UnCheck(LinqMethods[i]), vscode.CompletionItemKind.Method)
-                    //             completionItems.push(ob);
-                    //          }
-                    //     }
-                    // }
+                        if (document.getText().includes("using System.Linq;")) {
+                            for (let i = 0; i < LinqMethods.length; i++) {
+                                var ob = new vscode.CompletionItem(UnCheck(LinqMethods[i]), vscode.CompletionItemKind.Method)
+                                completionItems.push(ob);
+                             }
+                        }
+                    }
                 }
 
             

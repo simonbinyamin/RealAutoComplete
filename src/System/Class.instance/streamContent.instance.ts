@@ -75,7 +75,7 @@ export const StreamContentInstanceDisposable = vscode.languages.registerCompleti
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.indexOf("StreamContent") !== -1 && !line.includes("var")
+                    if(line.indexOf("StreamContent") !== -1 && !line.includes("var") && line.indexOf(";") === -1
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());

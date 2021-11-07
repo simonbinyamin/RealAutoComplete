@@ -12,7 +12,8 @@ export const NumberInstanceDisposable = vscode.languages.registerCompletionItemP
         {
             const listVariables = Array<string>();
             const endsWithBooleans = [];
-           //            
+            const datatypes = ["int", "uint", "ulong", "long", "float", "double", "decimal", "short", "ushort", "byte", "sbyte", "char", "bool", "Boolean", "object", "Object", "Int16", "Int32", "Int64", "IntPtr", "Single"];
+                      
             if (document.getText().includes("int ") 
             || document.getText().includes("uint ")
             || document.getText().includes("ulong ")
@@ -38,35 +39,88 @@ export const NumberInstanceDisposable = vscode.languages.registerCompletionItemP
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("int ") 
-                    || line.includes("uint ")
-                    || line.includes("ulong ")
-                    || line.includes("long ")
-                    || line.includes("float ")
-                    || line.includes("double ")
-                    || line.includes("decimal ")
-                    || line.includes("short ")
-                    || line.includes("ushort ")
-                    || line.includes("byte ")
-                    || line.includes("sbyte ")
-                    || line.includes("char ")
-                    || line.includes("bool ")
-                    || line.includes("Boolean ")
-                    || line.includes("object ")
-                    || line.includes("Object ")
-                    || line.includes("Int16 ")
-                    || line.includes("Int32 ")
-                    || line.includes("Int64 ")
-                    || line.includes("IntPtr ")
-                    || line.includes("Single ")
+                    if(line.includes("int ") && line.indexOf(";") !== -1
+                    || line.includes("uint ")&& line.indexOf(";") !== -1
+                    || line.includes("ulong ")&& line.indexOf(";") !== -1
+                    || line.includes("long ")&& line.indexOf(";") !== -1
+                    || line.includes("float ")&& line.indexOf(";") !== -1
+                    || line.includes("double ")&& line.indexOf(";") !== -1
+                    || line.includes("decimal ")&& line.indexOf(";") !== -1
+                    || line.includes("short ")&& line.indexOf(";") !== -1
+                    || line.includes("ushort ")&& line.indexOf(";") !== -1
+                    || line.includes("byte ")&& line.indexOf(";") !== -1
+                    || line.includes("sbyte ")&& line.indexOf(";") !== -1
+                    || line.includes("char ")&& line.indexOf(";") !== -1
+                    || line.includes("bool ")&& line.indexOf(";") !== -1
+                    || line.includes("Boolean ")&& line.indexOf(";") !== -1
+                    || line.includes("object ")&& line.indexOf(";") !== -1
+                    || line.includes("Object ")&& line.indexOf(";") !== -1
+                    || line.includes("Int16 ")&& line.indexOf(";") !== -1
+                    || line.includes("Int32 ")&& line.indexOf(";") !== -1
+                    || line.includes("Int64 ")&& line.indexOf(";") !== -1
+                    || line.includes("IntPtr ")&& line.indexOf(";") !== -1
+                    || line.includes("Single ") && line.indexOf(";") !== -1
 
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
-                        listVariables.push(lineArray[1].slice(0,-1));
+                        listVariables.push(lineArray[1]);
                     }
                 }
             }
+            
+
+            // var x = 5;
+            if (document.getText().includes("var ")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("var ") && line.indexOf(";") !== -1 && !line.includes("new")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        if(isNaN(Number(lineArray[3].slice(0, -1)))==false) {
+                            listVariables.push(lineArray[1].slice(0, -1));
+                        }
+
+                    }
+                }
+            }
+
+            // method(Uri x,Uri x, Uri x)
+            for (let type = 0; type < datatypes.length; type++) {
+                if (document.getText().indexOf(datatypes[type]) !== -1
+                ) {
+                    for (let i = 1; i < document.lineCount; i++) {
+                        var line = document.lineAt(i).text;
+                        if(line.indexOf(datatypes[type]) !== -1 && !line.includes("var") && line.indexOf(";") === -1
+                        ) {
+                            var lineArray = line.split(" ");
+                            lineArray = lineArray.filter(e => String(e).trim());
+    
+                            let index1 = lineArray.findIndex(str => str.includes(datatypes[type]))
+    
+                            if(index1 > 1) {
+    
+                                var instaince = lineArray[index1+1];
+                                if(instaince.indexOf(",") !== -1) {
+                                 listVariables.push(instaince.slice(0, -1));                               
+                                } else if (instaince.indexOf("){") !== -1) {
+                                    listVariables.push(instaince.slice(0, -2));
+                                } else if (instaince.indexOf(")") !== -1) {
+                                    listVariables.push(instaince.slice(0, -1));
+                                }
+    
+                            }
+    
+                           
+                        }
+                    }
+                }
+            }
+           
+
+
             
             const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let i = 0; i < listVariables.length; i++) {

@@ -13,20 +13,95 @@ export const LookupInstanceDisposable = vscode.languages.registerCompletionItemP
             const listVariables = Array<string>();
             const endsWithBooleans = [];
            
-            if (document.getText().includes("Lookup<") 
+            // if (document.getText().includes("Lookup<") 
+            // ) {
+            //     for (let i = 1; i < document.lineCount; i++) {
+            //         var line = document.lineAt(i).text;
+            //         if(line.includes("Lookup<") 
+            //         ) {
+            //             var lineArray = line.split(" ");
+            //             console.log(lineArray);
+            //             console.log("Linked");
+            //             lineArray = lineArray.filter(e => String(e).trim());
+            //             listVariables.push(lineArray[2]);
+            //         }
+            //     }
+            // }
+
+            //Uri x = ToLookup Uri
+            if (document.getText().includes("Lookup<") && !document.getText().includes("var ")
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("Lookup<") 
+                    if(line.includes("Lookup<") && line.indexOf(";") !== -1 && line.indexOf("ToLookup") !== -1 && !line.includes("var")
                     ) {
                         var lineArray = line.split(" ");
-                        console.log(lineArray);
-                        console.log("Linked");
                         lineArray = lineArray.filter(e => String(e).trim());
                         listVariables.push(lineArray[2]);
                     }
                 }
             }
+            
+            // var x =  ToLookup Uri
+            if (document.getText().includes("var ") && document.getText().indexOf("ToLookup") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("var ") && line.indexOf("ToLookup")  && line.indexOf("Lookup<") !== -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1]);
+                    }
+                }
+            }
+
+            // Uri x;
+            if (document.getText().includes("Lookup<")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("Lookup<") && line.indexOf(";") !== -1 && !line.includes("new")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[2].slice(0, -1));
+                    }
+                }
+            }
+
+            // method(Uri x,Uri x, Uri x)
+            if (document.getText().indexOf("Lookup<") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.indexOf("Lookup<") !== -1 && !line.includes("var") && line.indexOf(";") === -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+
+                        let index1 = lineArray.findIndex(str => str.includes("Lookup<"))
+                        console.log(lineArray);
+                        console.log(index1);
+                        if(index1 > 1) {
+
+                            var instaince = lineArray[index1+1];
+                            if(instaince.indexOf(",") !== -1) {
+                             listVariables.push(instaince.slice(0, -1));                               
+                            } else if (instaince.indexOf("){") !== -1) {
+                                listVariables.push(instaince.slice(0, -2));
+                            } else if (instaince.indexOf(")") !== -1) {
+                                listVariables.push(instaince.slice(0, -1));
+                            }
+
+                        }
+
+                       
+                    }
+                }
+            }
+
+
             
             const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let i = 0; i < listVariables.length; i++) {

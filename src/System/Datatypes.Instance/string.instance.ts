@@ -12,13 +12,27 @@ export const StringInstanceDisposable = vscode.languages.registerCompletionItemP
         {
             const listVariables = Array<string>();
             const endsWithBooleans = [];        
-            if (document.getText().includes("string ") 
-            || document.getText().includes("String ")
+            // if (document.getText().includes("string ") 
+            // || document.getText().includes("String ")
+            // ) {
+            //     for (let i = 1; i < document.lineCount; i++) {
+            //         var line = document.lineAt(i).text;
+            //         if(line.includes("string ") 
+            //         || line.includes("String ")
+            //         ) {
+            //             var lineArray = line.split(" ");
+            //             lineArray = lineArray.filter(e => String(e).trim());
+            //             listVariables.push(lineArray[1].slice(0,-1));
+            //         }
+            //     }
+            // }
+            
+
+            if (document.getText().includes("string ")
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("string ") 
-                    || line.includes("String ")
+                    if(line.includes("string ") && line.indexOf(";") !== -1 && !line.includes("var")
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
@@ -27,6 +41,55 @@ export const StringInstanceDisposable = vscode.languages.registerCompletionItemP
                 }
             }
             
+
+
+              // var x =  new Uri
+              if (document.getText().includes("var ")
+              ) {
+                  for (let i = 1; i < document.lineCount; i++) {
+                      var line = document.lineAt(i).text;
+                      if(line.includes("var ") && line.indexOf('"') >= 0 && !line.includes("new")
+                      ) {
+                          var lineArray = line.split(" ");
+                          lineArray = lineArray.filter(e => String(e).trim());
+                          listVariables.push(lineArray[1]);
+                      }
+                  }
+              }
+  
+
+
+            // method(Uri x,Uri x, Uri x)
+            if (document.getText().indexOf("string") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.indexOf("string") !== -1 && !line.includes("var") && line.indexOf(";") === -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+
+                        let index1 = lineArray.findIndex(str => str.includes("string"))
+
+                        if(index1 > 1) {
+
+                            var instaince = lineArray[index1+1];
+                            if(instaince.indexOf(",") !== -1) {
+                             listVariables.push(instaince.slice(0, -1));                               
+                            } else if (instaince.indexOf("){") !== -1) {
+                                listVariables.push(instaince.slice(0, -2));
+                            } else if (instaince.indexOf(")") !== -1) {
+                                listVariables.push(instaince.slice(0, -1));
+                            }
+
+                        }
+
+                       
+                    }
+                }
+            }
+
+
             const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let i = 0; i < listVariables.length; i++) {
                     var e = !linePrefix.endsWith(listVariables[i]+".");
@@ -46,12 +109,12 @@ export const StringInstanceDisposable = vscode.languages.registerCompletionItemP
             var completionItems:vscode.CompletionItem[] = [];
 
                 for (let index = 0; index < listVariables.length; index++) {
-                    // var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
-                    // completionItem.detail = "instance";
-                    // completionItem.filterText = listVariables[index];
-                    // completionItem.insertText = listVariables[index];
-                    // completionItem.kind = vscode.CompletionItemKind.Variable;
-                    // completionItems.push(completionItem);
+                    var completionItem:vscode.CompletionItem = new vscode.CompletionItem(listVariables[index]);
+                    completionItem.detail = "instance";
+                    completionItem.filterText = listVariables[index];
+                    completionItem.insertText = listVariables[index];
+                    completionItem.kind = vscode.CompletionItemKind.Variable;
+                    completionItems.push(completionItem);
                     
                 }
 
@@ -60,13 +123,13 @@ export const StringInstanceDisposable = vscode.languages.registerCompletionItemP
                 for (let index = 0; index < listVariables.length; index++) {
                     
                     
-                    // if (linePrefix.endsWith(listVariables[index]+'.')) {
-                    //     for (let i = 0; i < Methods.length; i++) {
-                    //         var ob = new vscode.CompletionItem(UnCheck(Methods[i]), vscode.CompletionItemKind.Method)
-                    //         completionItems.push(ob);
+                    if (linePrefix.endsWith(listVariables[index]+'.')) {
+                        for (let i = 0; i < Methods.length; i++) {
+                            var ob = new vscode.CompletionItem(UnCheck(Methods[i]), vscode.CompletionItemKind.Method)
+                            completionItems.push(ob);
                     
-                    //     }
-                    // }
+                        }
+                    }
                 }
 
 

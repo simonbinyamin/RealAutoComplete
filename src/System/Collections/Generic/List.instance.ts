@@ -13,21 +13,93 @@ export const ListInstanceDisposable = vscode.languages.registerCompletionItemPro
             const listVariables = Array<string>();
             const endsWithBooleans = [];
            
-            if (document.getText().includes("List<") && !document.getText().includes("LinkedList<")
+            // if (document.getText().includes("List<") && !document.getText().includes("LinkedList<")
+            // ) {
+            //     for (let i = 1; i < document.lineCount; i++) {
+            //         var line = document.lineAt(i).text;
+            //         if(line.includes("List<") 
+            //         ) {
+            //             var lineArray = line.split(" ");
+            //             lineArray = lineArray.filter(e => String(e).trim());
+            //             console.log(lineArray);
+            //             console.log("lsit");
+            //             listVariables.push(lineArray[1]);
+            //         }
+            //     }
+            // }
+            
+            //Uri x = new Uri
+            if (document.getText().includes("List<")
             ) {
                 for (let i = 1; i < document.lineCount; i++) {
                     var line = document.lineAt(i).text;
-                    if(line.includes("List<") 
+                    if(line.includes("List<") && line.indexOf(";") !== -1 && line.includes("new") && !line.includes("var") && !line.includes("LinkedList<")
                     ) {
                         var lineArray = line.split(" ");
                         lineArray = lineArray.filter(e => String(e).trim());
-                        console.log(lineArray);
-                        console.log("lsit");
                         listVariables.push(lineArray[1]);
                     }
                 }
             }
             
+            // var x =  new Uri
+            if (document.getText().includes("var ") && document.getText().includes("new List<")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("var ") && line.includes("new List<")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1]);
+                    }
+                }
+            }
+
+            // Uri x;
+            if (document.getText().includes("List<")
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.includes("List<") && line.indexOf(";") !== -1 && !line.includes("new")
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+                        listVariables.push(lineArray[1].slice(0, -1));
+                    }
+                }
+            }
+
+            // method(Uri x,Uri x, Uri x)
+            if (document.getText().indexOf("List<") !== -1
+            ) {
+                for (let i = 1; i < document.lineCount; i++) {
+                    var line = document.lineAt(i).text;
+                    if(line.indexOf("List<") !== -1 && !line.includes("var") && line.indexOf(";") === -1
+                    ) {
+                        var lineArray = line.split(" ");
+                        lineArray = lineArray.filter(e => String(e).trim());
+
+                        let index1 = lineArray.findIndex(str => str.includes("List<"))
+
+                        if(index1 > 1) {
+
+                            var instaince = lineArray[index1+1];
+                            if(instaince.indexOf(",") !== -1) {
+                             listVariables.push(instaince.slice(0, -1));                               
+                            } else if (instaince.indexOf("){") !== -1) {
+                                listVariables.push(instaince.slice(0, -2));
+                            } else if (instaince.indexOf(")") !== -1) {
+                                listVariables.push(instaince.slice(0, -1));
+                            }
+
+                        }
+
+                       
+                    }
+                }
+            }
+
             const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 for (let i = 0; i < listVariables.length; i++) {
                     var e = !linePrefix.endsWith(listVariables[i]+".");
