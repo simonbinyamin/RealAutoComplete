@@ -3,7 +3,7 @@
 import { triggerAsyncId } from 'async_hooks';
 import { kMaxLength } from 'buffer';
 import * as vscode from 'vscode';
-import { httpContextDisposable, requestServicesDisposable } from './Microsoft/AspNetCore/Http/HttpContext';
+import { Item } from './Models/Item';
 import { ActionDisposable, AssemblyLoadEventHandlerDisposable, DelegateDisposable, EventHandlerDisposable } from './System/Action';
 import { ActivatorDisposable } from './System/Activator';
 import { ApiControllerAttributeDisposable, ApiConventionMethodAttributeDisposable, 
@@ -79,21 +79,9 @@ import { AttributeTargetsDisposable } from './System/AttributeTargets';
 import { BooleanDisposable } from './System/Boolean';
 import { BufferDisposable } from './System/Buffer';
 import { ByteDisposable, DecimalDisposable, DoubleDisposable, Int16Disposable, Int32Disposable, Int64Disposable, intDisposable, IntPtrDisposable } from './System/Byte';
-import { AttributeInstanceDisposable } from './System/Class.instance/atribute.instance';
-import { ArrayInstanceDisposable } from './System/Collections/Generic/Array.instance';
-import { DictionaryInstanceDisposable } from './System/Collections/Generic/Dictionary.instance';
-import { HashSetInstanceDisposable } from './System/Collections/Generic/HashSet.instance';
-import { LinkedListInstanceDisposable } from './System/Collections/Generic/LinkedList.instance';
-import { ListInstanceDisposable } from './System/Collections/Generic/List.instance';
-import { QueueInstanceDisposable } from './System/Collections/Generic/Queue.instance';
-import { StackInstanceDisposable } from './System/Collections/Generic/Stack.instance';
 import { consoleDisposable } from './System/Console';
 import { BitConverterDisposable, convertDisposable } from './System/Convert';
-import { DateTimeInstanceDisposable } from './System/Datatypes.Instance/DateTime.instance';
-import { StringInstanceDisposable } from './System/Datatypes.Instance/string.instance';
-import { NumberInstanceDisposable } from './System/Datatypes.Instance/number.instance';
 import { dateTimeDisposable } from './System/DateTime';
-import { drawingImageDisposable } from './System/Drawing/Image';
 import { EnumDisposable } from './System/Enum';
 import { EnvironmentDisposable } from './System/Environment';
 import { guidDisposable } from './System/Guid';
@@ -109,14 +97,6 @@ import { stringDisposable } from './System/String';
 import { TaskDisposable } from './System/Task';
 import { ToStringDisposable } from './System/ToString';
 import { uriDisposable } from './System/Uri';
-import { AssemblyInstanceDisposable } from './System/Class.instance/assembly.instance';
-import { LookupInstanceDisposable } from './System/Collections/Generic/Lookup.instance';
-import { HttpContentInstanceDisposable } from './System/Class.instance/httpContent.instance';
-import { HttpClientInstanceDisposable } from './System/Class.instance/httpClient.instance';
-import { StreamContentInstanceDisposable } from './System/Class.instance/streamContent.instance';
-import { ViewResultInstanceDisposable } from './System/Class.instance/viewResult.instance';
-import { UriInstanceDisposable } from './System/Class.instance/uri.instance';
-import { TaskInstanceDisposable } from './System/Class.instance/task.instance';
 
 
 // this method is called when your extension is activated
@@ -138,10 +118,11 @@ export function activate(context: vscode.ExtensionContext) {
 				return new Promise((resolve, reject) => { 
 				var completionItems:vscode.CompletionItem[] = [];
 				var json = require('./Json/trial.json');
+				var autolst:Item[] = json.Auto.Lst as Item[];
 				var classes = json.Classes as string[];
 				var events = json.Events as string[];
-				var structs = json.Struts as string[]
-				var Keywords = json.Keywords as string[]
+				var structs = json.Struts as string[];
+				var Keywords = json.Keywords as string[];
 
 				for (let index = 0; index < Keywords.length; index++) {
 					
@@ -187,6 +168,16 @@ export function activate(context: vscode.ExtensionContext) {
 					
 				}
 				
+				for (let index = 0; index < autolst.length; index++) {
+					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(autolst[index].Id);
+					completionItem.detail = autolst[index].Id;
+					completionItem.filterText = autolst[index].Id;
+					completionItem.insertText = autolst[index].Name;
+					completionItem.kind = vscode.CompletionItemKind.Snippet;
+					completionItems.push(completionItem);
+					
+				}
+	
 				
 				return resolve(completionItems);
 				});
@@ -202,27 +193,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(disposable,
 		consoleDisposable, 
-		NumberInstanceDisposable,
-		AssemblyInstanceDisposable,
 		convertDisposable, 
 		uriDisposable,
 		arrayDisposable,
 		mathDisposable,
 		stringDisposable,
-		drawingImageDisposable,
-		httpContextDisposable,
-		requestServicesDisposable,
 		dateTimeDisposable,
 		guidDisposable,
-		ListInstanceDisposable,
-		ArrayInstanceDisposable,
-		StackInstanceDisposable,
-		QueueInstanceDisposable,
-		DictionaryInstanceDisposable,
-		LinkedListInstanceDisposable,
-		HashSetInstanceDisposable,
-		DateTimeInstanceDisposable,
-		StringInstanceDisposable,
 		ActionDisposable,
 		AssemblyLoadEventHandlerDisposable,
 		ActivatorDisposable,
@@ -336,8 +313,6 @@ export function activate(context: vscode.ExtensionContext) {
 		DecimalDisposable,
 		DelegateDisposable,
 		EventHandlerDisposable,
-		LookupInstanceDisposable,
-		HttpContentInstanceDisposable,
 		ToStringDisposable,
 		EnumDisposable,
         EnvironmentDisposable,
@@ -346,12 +321,6 @@ export function activate(context: vscode.ExtensionContext) {
         JsonConvertDisposable,
         ParallelDisposable,
         TaskDisposable,
-		AttributeInstanceDisposable,
-		HttpClientInstanceDisposable,
-		StreamContentInstanceDisposable,
-		ViewResultInstanceDisposable,
-		UriInstanceDisposable,
-		TaskInstanceDisposable
 		);
 }
             //int uint ulong long float double decimal short ushort byte sbyte char bool object
