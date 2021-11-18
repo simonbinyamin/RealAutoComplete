@@ -2,7 +2,7 @@
 	"name": "realautocomplete",
 	"displayName": "Real C# IntelliSense",
 	"description": "Real c# .net intellisense - real autocomplete",
-	"version": "1.0.5",
+	"version": "2.0.0",
 	"publisher": "realvisualstudio",
 	"icon": "icons/head.png",
     "author": {

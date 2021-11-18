@@ -2,113 +2,34 @@
 
     "Auto": {
         "Lst" : [
-            { "Id": "route",  "Name": "Route()" },
-            { "Id": "test", "Name": "Route(\"Example text\")" }
+            { "Id": "ApiController",  "Name": "[ApiController]" },
+            { "Id": "RouteController", "Name": "Route(\"api/[controller]\")" },
+            { "Id": "RouteParam", "Name": "Route(\"GetCompany/{id}\")" },
+            { "Id": "Route", "Name": "Route(\"Create\")" },
+            { "Id": "Validate", "Name": "[ValidateAntiForgeryToken]" },
+            { "Id": "Post", "Name": "[HttpPost]" },
+            { "Id": "Fromform", "Name": "[FromForm]Company command" },
+            { "Id": "Auth", "Name": "[Authorize]" },
+            { "Id": "HttpPut", "Name": "HttpPut(\"{id}\")" },
+            { "Id": "HttpDelete", "Name": "HttpDelete(\"{id}\")" },
+            { "Id": "Primary", "Name": "[Key]\n[DatabaseGenerated(DatabaseGeneratedOption.Identity)]\npublic int Id { get; set; }" },
+            { "Id": "FromBody", "Name": "[FromBody] UserModel user" },
+            { "Id": "LinqAny", "Name": "var Exist = (from ur in _context.Users where ur.EmailAddress==user.EmailAddress select ur).Any();" },
+            { "Id": "LinqFirstOr", "Name": "UserModel user = (from u in _context.Users where u.UserName == login.UserName select u).FirstOrDefault();" },
+            { "Id": "varchar", "Name": "[Column(TypeName = \"VARCHAR\")]\n[StringLength(15)]\npublic string name { get; set; }" },
+            { "Id": "date", "Name": "[Column(TypeName = \"DATE\")]\npublic DateTime date { get; set; }" },
+            { "Id": "bit", "Name": "[Column(TypeName = \"BIT\")]\npublic bool iswork { get; set; }" },
+            { "Id": "numeric", "Name": "[Column(TypeName = \"NUMERIC(18,2)\")]\npublic decimal num { get; set; }" },
+            { "Id": "decimal", "Name": "[Column(TypeName = \"DECIMAL(5,4)\")]\npublic decimal num { get; set; }" },
+            { "Id": "time", "Name": "[Column(TypeName = \"TIME(0)\")]\npublic TimeSpan time { get; set; }" },
+            { "Id": "smalldatetime", "Name": "[Column(TypeName = \"SMALLDATETIME\")]\npublic DateTime date { get; set; }" },
+            { "Id": "nchar", "Name": "[Column(TypeName = \"NCHAR\")]\npublic string chr { get; set; }" },
+            { "Id": "primaryNoIncrement", "Name": "[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]\npublic int Id { get; set; }" }
+
          ]
     },
-    "System": {
-        "Linq": {
-            "Methods":["!--9?-#t?<>", "!€€<>", "!]y<>", "!00?])<>", "!s=]u{?9#%€?<>", "!s|#9#€€?€", "!s|#9#€€?€<>", "!s5u?9y#%€?", "!s5u?9y#%€?<>", "!v?9#-?", "!v?9#-?<>", "&#st<>", "&±]/#t<>", "&±]t#i]s<>", "&±u]t<>", "(?f#u€t:f={0ty<>", "(isti]/t<>", "=€?{?]t!t<>", "=€?{?]t!t}9(?f#u€t<>", "=x/?0t<>", "*i9st<>", "*i9st}9(?f#u€t<>", "G9±u0¤y<>", "G9±u0;±i]<>", ":]t?9s?/t<>", ";±i]<>", "$#st<>", "$#st}9(?f#u€t<>", "$±]-&±u]t<>", "¥#x", "¥#x<>", "¥i]", "¥i]<>", "}fTy0?<>", "}9)?9¤y<>", "}9)?9¤y(?s/?])i]-<>", "|9?0?])<>", "8?v?9s?<>", "S?€?/t<>", "S?€?/t¥#]y<>", "S?7u?]/?=7u#€<>", "Si]-€?<>", "Si]-€?}9(?f#u€t<>", "S£i0<>", "S£i0$#st<>", "S£i0Whi€?<>", "Su{", "Su{<>", "T#£?", "T#£?$#st<>", "T#£?Whi€?<>", "T±!99#y<>", "T±(i/ti±]#9y<>", "T±_#shS?t<>", "T±$ist<>", "T±$±±£u0<>", "U]i±]<>", "Wh?9?<>", ",i0<>"]
-        },
-        "Convert": {
-            "Methods": ["*9±{¤#s?64&h#9!99#y", "*9±{¤#s?64St9i]-", "*9±{_?xSt9i]-", "&h#]-?Ty0?", "=7u#€s", "G?tTy0?&±)?",":s(¤[u€€", "8?f?9?]/?=7u#€s", "T±¤#s?64&h#9!99#y", "T±¤#s?64St9i]-", "T±¤±±€?#]", "T±¤yt?", "T±&h#9", "T±(#t?Ti{?", "T±(?/i{#€","T±(±u%€?", "T±:]t16", "T±:]t32", "T±:]t64", "T±_?xSt9i]-", "T±S¤yt?", "T±Si]-€?", "T±St9i]-", "T9y*9±{¤#s?64&h#9s","T9y*9±{¤#s?64St9i]-", "T9yT±¤#s?64&h#9s", "T±U:]t16", "T±U:]t32", "T±U:]t64", "T9y*9±{¤#s?64&h#9s"]
-        },
-        "Console": {
-            "Methods":["W9it?$i]?", "¤??0", "W9it?", "&€?#9", "=7u#€s", "G?t&u9s±9|±siti±]", "¥±v?¤uff?9!9?#", "}0?]St#])#9)=99±9","}0?]St#])#9):]0ut", "}0?]St#])#9)}ut0ut", "8?#)", "8?#)$i]?", "8?#)@?y", "8?f?9?]/?=7u#€s", "8?s?t&±€±9", "S?t¤uff?9Siz?","S?t=99±9", "S?t&u9s±9|±siti±]", "S?t:]", "S?t}ut", "S?tWi])±w|±siti±]", "S?tWi])±wSiz?"]
-        },
-        "Uri": {
-            "Methods":["&h?/£_±st[#{?", "&h?/£S/h?{?[#{?", "&±{0#9?", "=7u#€s", "=s/#0?(#t#St9i]-", "=s/#0?U9iSt9i]-","*9±{_?x", "_?x=s/#0?", "_?xU]?s/#0?", ":s_?x(i-it", "s_?x=]/±)i]-", ":sW?€€*±9{?)U9iSt9i]-", "8?f?9?]/?=7u#€s", "T9y&9?#t?", "U]?s/#0?(#t#St9i]-"]
-        },
-        "Array": {
-            "Methods":["={0ty", "!s8?#)}]€y", "¤i]#9yS?#9/h", "&€?#9", "&±]st9#i]?)&±0y", "&±]v?9t!€€", "&±0y", "&9?#t?:]st#]/?", "=7u#€s","=xists", "*i€€", "*i])", "*i])!€€", "*i]):])?x", "*i])$#st", "*±9=#/h", ":])?x}f", "$#st:])?x}f", "8?f?9?]/?=7u#€s", "8?siz?", "8?v?9s?", "S±9t", "T9u?*±9!€€"]
-        },
-        "Action": {
-            "Methods":["&±{%i]?", "&9?#t?(?€?-#t?", "=7u#€s", "8?f?9?]/?=7u#€s", "8?{±v?", "8?{±v?!€€"]
-        },
-        "Activator": {
-            "Methods":["&9?#t?:]st#]/?", "&9?#t?:]st#]/?*9±{", "=7u#€s", "8?f?9?]/?=7u#€s"]
-        },
-        "ApiControllerAttribute": {
-            "Methods":["=7u#€s", "G?t&ust±{!tt9i%ut?", "G?t&ust±{!tt9i%ut?s", ":s(?fi]?)", "8?f?9?]/?=7u#€s"]
-        },
-        "AppDomain": {
-            "Methods":["&9?#t?(±{#i]", "=7u#€s", "G?t&u99?]tTh9?#):)", "8?f?9?]/?=7u#€s", "U]€±#)"]
-        },
-        "AppContext": {
-            "Methods":["=7u#€s", "G?t(#t#", "8?f?9?]/?=7u#€s", "S?tSwit/h", "T9yG?tSwit/h"]
-        },
-        "Assembly": {
-            "Methods":["&9?#t?5u#€ifi?)[#{?", "=7u#€s", "G?t!ss?{%€y", "G?t&#€€i]-!ss?{%€y", "G?t=]t9y!ss?{%€y", "G?t=x?/uti]-!ss?{%€y", "$±#)", "$±#)*i€?", "$±#)*9±{", "$±#)With|#9ti#€[#{?", "8?f?9?]/?=7u#€s", "8?f€?/ti±]}]€y$±#)", "8?f€?/ti±]}]€y$±#)*9±{", "U]s#f?$±#)*9±{" ]
-        },
-        "AssemblyFlags": {
-            "Methods":["&±]t?]tTy0?¥#s£", "(is#%€?;it&±{0i€?}0ti{iz?9", "=]#%€?;it&±{0i€?T9#/£i]-", "|u%€i/@?y", "8?t#9-?t#%€?", "Wi])±ws8u]ti{?" ]
-        },
-        "AssemblyHashAlgorithm": {
-            "Methods":["¥(", "[±]?", "Sh#1", "Sh#26", "Sh#34", "Sh#12" ]
-        },
-        "AssemblyName": {
-            "Methods":["G?t!ss?{%€y[#{?", "=7u#€s", "8?f?9?]/?=7u#€s", "8?f?9?]/?¥#t/h?s(?fi]iti±]" ]
-        },
-        "AssemblyNameFlags": {
-            "Methods":["=]#%€?;:T/±{0i€?}0ti{iz?9", "=]#%€?;:T/±{0i€?T9#/£i]-", "[±]?", "|u%€i/@?y", "8?t#9-?t#%€?" ]
-        },
-        "AttributeTargets": {
-            "Methods":["!€€", "!ss?{%€y", "&€#ss", "&±]st9u/t±9", "(?€?-#t?", "=]u{", "=v?]t", "*i?€)", "G?]?9i/|#9#{?t?9", ":]t?9f#/?", "¥?th±)", "¥±)u€?", "|#9#{?t?9", "|9±0?9ty", "8?tu9]V#€u?", "St9u/t" ]
-        },
-        
-        "Math": {
-            "Methods":["¥i]", "¥#x", "!%s", "T9u]/#t?", "!/±s", "|:", "&±s", "Si]", "S79t", "!/±sh", "!si]", "!si]h", "!t#]", "!t#]2", "!t#]h", "¤i-¥u€", "¤it(?/9?{?]t", "¤it:]/9?{?]t", "&%9t", "&?i€i]-", "&€#{0", "&±0ySi-]", "&±sh", "(iv8?{", "=", "=7u#€s", "=x0","*us?)¥u€ti0€y!))", "*€±±9", ":===8?{#i])?9", ":$±-¤", "¥#x¥#-]itu)?", "$±-1", "$±-2", "$±-", "¥i]¥#-]itu)?", "¥#x¥#-]itu)?", "¥i]","|±w", "8?f?9?]/?=7u#€s", "8±u])", "S/#€?¤", "Si-]", "Si]h", "T#]", "T#]h", "T#u"]
-        },
-        "String": {
-            "Methods":["&±{0#9?", "&±{0#9?}9)i]#€", "&±]/#t", "&9?#t?", "=7u#€s", "*±9{#t", "G?t_#sh&±)?", ":]t?9]", ":s[u€€}9={0ty",":s[u€€}9Whit?S0#/?", ";±i]", "8?f?9?]/?=7u#€s"]
-        },
-        "DateTime": {
-            "Methods":["&±{0#9?", "(#ys:]¥±]th", "=7u#€s", "*9±{¤i]#9y", "*9±{*i€?Ti{?", "*9±{*i€?Ti{?Ut/", "*9±{}!(#t?", ":s$?#0Y?#9", "|#9s?", "|#9s?=x#/t", "8?f?9?]/?=7u#€s", "S0?/ify@i])", "T9y|#9s?", "T9y|#9s?=x#/t"],
-            "Props":["[±w", "T±)#y", "Ut/[±w"]
-        },
-        "Guid":{
-            "Methods":["[?wGui)", "|#9s?", "=7u#€s", "|#9s?=x#/t", "8?f?9?]/?=7u#€s", "T9y|#9s?", "T9y|#9s?=x#/t"]
-        },
-        "Boolean": {
-            "Methods":["|#9s?", "=7u#€s", "*#€s?St9i]-", "T9u?St9i]-", "8?f?9?]/?=7u#€s", "T9y|#9s?" ]
-        },
-        "Buffer": {
-            "Methods":["¤€±/£&±0y", "¤yt?$?]-th", "=7u#€s", "G?t¤yt?", "¥?{±9y&±0y", "8?f?9?]/?=7u#€s", "S?t¤yt?" ]
-        },
-        "Byte": {
-            "Methods":["¥#xV#€u?", "=7u#€s", "¥i]V#€u?", "|#9s?", "8?f?9?]/?=7u#€s", "T9y|#9s?" ]
-        },
-        "Index": {
-            "Methods":["=])", "*9±{=])", "*9±{St#9t", "St#9t" ]
-        },
-        "Enum": {
-            "Methods":["*±9{#t", "=7u#€s", "G?t[#{?", "G?t[#{?s", "G?tU])?9€yi]-Ty0?", "G?tV#€u?s", ":s(?fi]?)", "|#9s?", "T±}%¡?/t", "T9y|#9s?" ]
-        },
-        "Environment": {
-            "Methods":["&±{{#])$i]?", "&u99?]t(i9?/t±9y", "&u99?]t¥#]#-?)Th9?#):)", "=7u#€s", "=xit", "=xit&±)?", "=x0#])=]vi9±]{?]tV#9i#%€?s", "*#i€*#st", "G?t&±{{#])$i]?!9-s", "G?t=]vi9±]{?]tV#9i#%€?", "G?t=]vi9±]{?]tV#9i#%€?s", "G?t*±€)?9|#th", "G?t$±-i/#€(9iv?s", "_#sShut)±w]St#9t?)", ":s64¤it}0?9#ti]-Syst?{", ":s64¤it|9±/?ss", "¥#/hi]?[#{?", "[?w$i]?", "}SV?9si±]", "|9±/?ss:)", "|9±/?ss±9&±u]t", "S?t=]vi9±]{?]tV#9i#%€?", "St#/£T9#/?", "Syst?{(i9?/t±9y", "Syst?{|#-?Siz?", "Ti/£&±u]t", "Ti/£&±u]t64", "Us?9(±{#i][#{?", "Us?9:]t?9#/tiv?", "Us?9[#{?", "V?9si±]", "W±9£i]-S?t" ]
-        },
-        "HttpMethod": {
-            "Methods":["G?t", "|±st", "|ut", "(?€?t?", "_?#)", "}0ti±]s", "T9#/?" ]
-        },        
-        "JObject": {
-            "Methods":["(??0=7u#€s", "=7u#€ity&±{0#9?9", "=7u#€s", "*9±{}%¡?/t", "$±#)", "$±#)!sy]/", "|#9s?", "8?#)*9±{", "8?#)*9±{!sy]/", "8?f?9?]/?=7u#€s" ]
-        },    
-        "JsonConvert": {
-            "Methods":["(?f#u€tS?tti]-s", "(?s?9i#€iz?!]±]y{±usTy0?", "(?s?9i#€iz?}%¡?/t", "(?s?9i#€iz?.{€[±)?", "(?s?9i#€iz?.[±)?", "=7u#€s", "|±0u€#t?}%¡?/t", "8?f?9?]/?=7u#€s", "S?9i#€iz?}%¡?/t", "S?9i#€iz?.{€[±)?", "S?9i#€iz?.[±)?", "T±St9i]-" ]
-        },
-        "Parallel": {
-            "Methods":["=7u#€s", "*±9", "*±9=#/h", ":]v±£?", "8?f?9?]/?=7u#€s" ]
-        }, 
-        "Task": {
-            "Methods":["&±{0€?t?)T#s£", "&u99?]t:)", "=7u#€s", "(?€#y", "*#/t±9y", "*9±{&#]/?€?)", "*9±{=x/?0ti±]", "*9±{8?su€t", "8u]", "W#it!€€", "W#it!]y", "Wh?]!€€", "Wh?]!]y", "Yi?€)" ]
-        }
-    },
     "Keywords":[
-        "new",
-        "var",
-        "await",
         "from",
-        "in",
         "select",
         "where",
         "dynamic",
@@ -116,147 +37,8 @@
         "readonly",
         "private",
         "public"
-    ],
-    "Classes":[
-        "Console",
-        "Convert",
-        "Stack",
-        "Queue",
-        "List",
-        "LinkedList",
-        "HashSet",
-        "Dictionary",
-        "string",
-        "BitConverter",
-        "Uri",
-        "Array",
-        "Math",
-        "String",		
-        "Image",		
-        "HttpContext",	
-        "DateTime",
-        "Activator",	
-        "AppDomain",
-        "Assembly",			
-        "AssemblyNameFlags",	
-        "AssemblyName",	
-        "AssemblyHashAlgorithm",	
-        "AssemblyFlags",	
-        "AttributeTargets",
-        "Boolean",	
-        "Buffer",
-        "ImmutableArrayExtensions",
-        "Index",
-        "Enum",
-        "ViewResult",
-        "HttpClient",
-        "StreamContent",
-        "Environment",
-        "HttpMethod",	
-        "JObject",		
-        "JsonConvert",	
-        "Parallel",
-        "Task",
-        "Queryable",		
-        "Enumerable",		
-        "ToString()",				
-        "Byte",	
-        "byte",	
-        "Int16",	
-        "Int32",		
-        "Int64",		
-        "int",		
-        "IntPtr",		
-        "Double",		
-        "Decimal",
-        "ApiControllerAttribute",		
-        "ApiConventionMethodAttribute",		
-        "ApiConventionTypeAttribute",				
-        "ApiExplorerSettingsAttribute",			
-        "AreaAttribute",				
-        "AssemblyAlgorithmIdAttribute",		
-        "AssemblyCompanyAttribute",		
-        "AssemblyConfigurationAttribute",	
-        "AssemblyCopyrightAttribute",			
-        "AssemblyCultureAttribute",
-        "AssemblyDefaultAliasAttribute",			
-        "AssemblyDelaySignAttribute",			
-        "AssemblyDescriptionAttribute",	
-        "AssemblyFileVersionAttribute",		
-        "AssemblyFlagsAttribute",				
-        "AssemblyInformationalVersionAttribute",			
-        "AssemblyKeyFileAttribute",				
-        "AssemblyKeyNameAttribute",			
-        "AssemblyMetadataAttribute",		
-        "AssemblyProductAttribute",		
-        "AssemblySignatureKeyAttribute",				
-        "AssemblyTitleAttribute",			
-        "AssemblyTrademarkAttribute",				
-        "AssemblyVersionAttribute",
-        "Attribute",	
-        "AutoValidateAntiforgeryTokenAttribute",	
-        "AttributeUsageAttribute",	
-        "BindAttribute",	
-        "BindPropertiesAttribute",
-        "BindPropertyAttribute",
-        "IgnoreAntiforgeryTokenAttribute",
-        "DefaultMemberAttribute",
-        "DisableRequestSizeLimitAttribute",
-        "FlagsAttribute",
-        "FromBodyAttribute",
-        "FromFormAttribute",
-        "FromHeaderAttribute",
-        "FromQueryAttribute",
-        "FromRouteAttribute",
-        "FromServicesAttribute",
-        "HiddenInputAttribute",
-        "HttpDeleteAttribute",
-        "HttpGetAttribute",
-        "HttpHeadAttribute",
-        "HttpOptionsAttribute",
-        "HttpPatchAttribute",
-        "HttpPostAttribute",
-        "HttpPutAttribute",
-        "JsonArrayAttribute",
-        "JsonConstructorAttribute",
-        "JsonContainerAttribute",
-        "JsonConverterAttribute",
-        "JsonDictionaryAttribute",
-        "JsonExtensionDataAttribute",
-        "JsonIgnoreAttribute",
-        "JsonObjectAttribute",
-        "JsonRequiredAttribute",
-        "JsonPropertyAttribute",
-        "MiddlewareFilterAttribute",
-        "ModelBinderAttribute",
-        "ModelMetadataTypeAttribute",
-        "MTAThreadAttribute",
-        "NonActionAttribute",
-        "NonControllerAttribute",
-        "NonSerializedAttribute",
-        "NonViewComponentAttribute",
-        "ObfuscateAssemblyAttribute",
-        "ObfuscationAttribute",
-        "ObsoleteAttribute",
-        "PageRemoteAttribute",
-        "ParamArrayAttribute",
-        "ProducesAttribute",
-        "ProducesDefaultResponseTypeAttribute",
-        "ProducesErrorResponseTypeAttribute",
-        "ProducesResponseTypeAttribute",
-        "ValidateAntiForgeryTokenAttribute",
-        "ViewDataAttribute",
-        "ViewComponentAttribute",
-        "ServiceFilterAttribute",
-        "SerializableAttribute",
-        "SkipStatusCodePagesAttribute",
-        "STAThreadAttribute",
-        "TypeAttribute",
-        "TempDataAttribute",
-        "ThreadStaticAttribute",
-        "TypeFilterAttribute"],
-    "Events":["Action","AssemblyLoadEventHandler", "Delegate", "EventHandler"],
-    "Struts":["Guid"]
+    ]
+
 }
  
 
