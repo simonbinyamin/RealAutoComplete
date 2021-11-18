@@ -1,7 +1,7 @@
 {
 	"name": "realautocomplete",
-	"displayName": "Real C# IntelliSense",
-	"description": "Real c# .net intellisense - real autocomplete",
+	"displayName": "Real C# autocomplete",
+	"description": "Real c# .net autocomplete",
 	"version": "2.0.0",
 	"publisher": "realvisualstudio",
 	"icon": "icons/head.png",
@@ -21,14 +21,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:realautocomplete.real-csharp-intellisense"
+		"onCommand:realautocomplete.real-csharp-autocomplete"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "realautocomplete.real-csharp-intellisense",
-				"title": "real-csharp-intellisense"
+				"command": "realautocomplete.real-csharp-autocomplete",
+				"title": "real-csharp-autocomplete"
 			}
 		]
 	},

@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	console.log('Congratulations, your extension "realautocomplete" is now active!');
 
-	let disposable = vscode.commands.registerCommand('realautocomplete.real-csharp-intellisense', () => {
+	let disposable = vscode.commands.registerCommand('realautocomplete.real-csharp-autocomplete', () => {
 		vscode.window.showInformationMessage('Hello World from realautocomplete!');
 		vscode.languages.registerCompletionItemProvider('csharp', {
 			
