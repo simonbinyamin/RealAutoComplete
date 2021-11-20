@@ -7,3 +7,5 @@ extensions.json
 launch.json
 settings.json
 tasks.json
+environment*
+environment.ts

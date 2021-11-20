@@ -5,47 +5,51 @@ import { kMaxLength } from 'buffer';
 import * as vscode from 'vscode';
 import { Item } from './Models/Item';
 
-
+import axios from 'axios';
+import { environment } from './Environments/environment';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 	
 	console.log('Congratulations, your extension "realautocomplete" is now active!');
-
+	const url: string = environment.URL;
+	let auto_result : Item[];
+	let script_result : Item[];
+	try {
+		const response = await axios.get(url);
+		console.log(response.data);
+		auto_result = response.data.auto.lst;
+		script_result = response.data.script.lst;
+	} catch (exception) {
+		process.stderr.write(`ERROR received from ${url}: ${exception}\n`);
+	}
+	
 	let disposable = vscode.commands.registerCommand('realautocomplete.real-csharp-autocomplete', () => {
 		vscode.window.showInformationMessage('Hello World from realautocomplete!');
 		vscode.languages.registerCompletionItemProvider('csharp', {
-			
-			
-			
-			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.CompletionItem[]> 
+
+			async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.CompletionItem[]> 
 			{
-	
-				
 				return new Promise((resolve, reject) => { 
 				var completionItems:vscode.CompletionItem[] = [];
-				var json = require('./Json/trial.json');
-				var autolst:Item[] = json.Auto.Lst as Item[];
-				var Keywords = json.Keywords as string[];
 
-				for (let index = 0; index < Keywords.length; index++) {
-					
-					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(Keywords[index]);
-					completionItem.detail = Keywords[index];
-					completionItem.filterText = Keywords[index];
-					completionItem.insertText = Keywords[index];
-					completionItem.kind = vscode.CompletionItemKind.User;
+				for (let index = 0; index < auto_result.length; index++) {
+					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(auto_result[index].Id);
+					completionItem.detail = auto_result[index].Id;
+					completionItem.filterText = auto_result[index].Id;
+					completionItem.insertText = auto_result[index].Name.replace(/\\n/g,'\n');
+					completionItem.kind = vscode.CompletionItemKind.TypeParameter;
 					completionItems.push(completionItem);
 					
 				}
-				
-				for (let index = 0; index < autolst.length; index++) {
-					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(autolst[index].Id);
-					completionItem.detail = autolst[index].Id;
-					completionItem.filterText = autolst[index].Id;
-					completionItem.insertText = autolst[index].Name;
-					completionItem.kind = vscode.CompletionItemKind.TypeParameter;
+
+				for (let index = 0; index < script_result.length; index++) {
+					var completionItem:vscode.CompletionItem = new vscode.CompletionItem(script_result[index].Id);
+					completionItem.detail = script_result[index].Id;
+					completionItem.filterText = script_result[index].Id;
+					completionItem.insertText = script_result[index].Name.replace(/\\n/g,'\n');
+					completionItem.kind = vscode.CompletionItemKind.User;
 					completionItems.push(completionItem);
 					
 				}

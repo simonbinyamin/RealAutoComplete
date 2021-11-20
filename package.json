@@ -2,18 +2,18 @@
 	"name": "realautocomplete",
 	"displayName": "Real C# autocomplete",
 	"description": "Real c# .net autocomplete",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"publisher": "realvisualstudio",
 	"icon": "icons/head.png",
-    "author": {
-        "name":"Simon Binyamin",
-        "email": "simon.m.binyamin@gmail.com",
-        "url": "https://www.onprodcs.com/"
-    },
-    "repository": {
-        "url": "https://github.com/simonbinyamin/RealAutoComplete.git",
-        "type": "git"
-    },
+	"author": {
+		"name": "Simon Binyamin",
+		"email": "simon.m.binyamin@gmail.com",
+		"url": "https://www.onprodcs.com/"
+	},
+	"repository": {
+		"url": "https://github.com/simonbinyamin/RealAutoComplete.git",
+		"type": "git"
+	},
 	"engines": {
 		"vscode": "^1.58.0"
 	},
@@ -59,5 +59,7 @@
 		"webpack": "^5.19.0",
 		"webpack-cli": "^4.4.0"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"axios": "^0.24.0"
+	}
 }
